@@ -240,10 +240,9 @@ def build_features(inputs: dict):
     imvl_ohe  = {f"imvl_type_{c}": int(inputs["imvl_type"] == c)
                  for c in imvl_cats}
 
-    zone_cats = ["Zona Central", "Zona Norte", "Zona Sul"]
+    zone_cats = ["Zona Central", "Zona Leste", "Zona Norte", "Zona Oeste", "Zona Sul"]
     zone_ohe  = {f"zone_{z}": int(inputs.get("zone", "") == z)
                  for z in zone_cats}
-
     poi_latlon = a.get("poi_latlon", {})
     poi_counts = {}
     for name, arr in poi_latlon.items():
@@ -285,11 +284,18 @@ def build_features(inputs: dict):
         "dist_trem_m":                float(dist_trem),
         "log_dist_metro":             float(np.log1p(dist_metro)),
         "log_dist_trem":              float(np.log1p(dist_trem)),
+        "n_supermarket_500m":         float(poi_counts.get("n_supermarket_500m", 0)),
+        "n_supermarket_1000m":        float(poi_counts.get("n_supermarket_1000m", 0)),
+        "n_restaurant_500m":          float(poi_counts.get("n_restaurant_500m", 0)),
         "n_restaurant_1000m":         float(poi_counts.get("n_restaurant_1000m", 0)),
         "n_park_500m":                float(poi_counts.get("n_park_500m", 0)),
+        "n_park_1000m":               float(poi_counts.get("n_park_1000m", 0)),
+        "n_pharmacy_500m":            float(poi_counts.get("n_pharmacy_500m", 0)),
         "n_pharmacy_1000m":           float(poi_counts.get("n_pharmacy_1000m", 0)),
         "n_bank_500m":                float(poi_counts.get("n_bank_500m", 0)),
         "n_bank_1000m":               float(poi_counts.get("n_bank_1000m", 0)),
+        "n_gym_500m":                 float(poi_counts.get("n_gym_500m", 0)),
+        "n_gym_1000m":                float(poi_counts.get("n_gym_1000m", 0)),
         "has_bank_500m":              int(poi_counts.get("n_bank_500m", 0) > 0),
         "walkability_score":          0.0,
     }
