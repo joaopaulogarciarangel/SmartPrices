@@ -182,12 +182,12 @@ def load_artifacts():
             return None, None
             
         # Extrair cat_cols direto do modelo — sempre em sync
-        cat_indices = model.get_cat_feature_indices()
-        assets["cat_cols"] = [assets["selected_features"][i] for i in cat_indices]
-
         # Salvar ordem exata que o modelo espera
         assets["model_feature_names"] = list(model.feature_names_)
-
+        
+        # cat_cols usando model_feature_names — ordem garantida
+        cat_indices = model.get_cat_feature_indices()
+        assets["cat_cols"] = [assets["model_feature_names"][i] for i in cat_indices]
         return model, assets
         
     except Exception as e:
