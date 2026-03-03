@@ -631,14 +631,14 @@ else:
         st.markdown("""
         <div class='metric-card'>
             <div class='price-label'>MAE Médio</div>
-            <div style='font-size:1.6rem;font-weight:600;margin:8px 0;color:#00d4ff'>R$ 56</div>
+            <div style='font-size:1.6rem;font-weight:600;margin:8px 0;color:#00d4ff'>R$ 900</div>
             <div style='font-size:0.8rem;color:#6b7280'>Erro médio absoluto</div>
         </div>""", unsafe_allow_html=True)
     with c3:
         st.markdown("""
         <div class='metric-card'>
             <div class='price-label'>R² Score</div>
-            <div style='font-size:1.6rem;font-weight:600;margin:8px 0;color:#c8ff00'>99.93%</div>
+            <div style='font-size:1.6rem;font-weight:600;margin:8px 0;color:#c8ff00'>85%</div>
             <div style='font-size:0.8rem;color:#6b7280'>Variância explicada</div>
         </div>""", unsafe_allow_html=True)
 
