@@ -135,6 +135,9 @@ CAT_COLS = [
     'imvl_type_quitinetes', 'imvl_type_studio',
     'geo_k10', 'geo_k30', 'geo_k100', 'has_bank_500m'
 ]
+# Fator de correção inflacionária (IGPM acumulado Jun/2020 → Fev/2026)
+# Atualizar conforme necessário: https://www.debit.com.br/tabelas/igpm-fgv-indice-geral-de-precos-mercado
+INFLATION_FACTOR = 1.49
 # ── Load artifacts ─────────────────────────────────────────────────────────────
 @st.cache_resource
 def load_artifacts():
@@ -432,7 +435,7 @@ if predict_btn:
         with st.spinner("Calculando..."):
             feat_df, lat, lon = build_features(inputs)
             pred_log   = model.predict(feat_df)[0]
-            pred_price = float(np.expm1(pred_log))
+            pred_price = float(np.expm1(pred_log)) * INFLATION_FACTOR
             st.session_state.result = {
                 "pred_price": pred_price,
                 "pred_min":   pred_price * 0.88,
