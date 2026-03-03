@@ -304,6 +304,7 @@ def build_features(inputs: dict) -> pd.DataFrame:
         if col not in df.columns:
             df[col] = assets["feature_medians"].get(col, 0)
     df = df[assets["selected_features"]].fillna(0)
+    df = df.astype(float)
     return df, lat, lon
 
 
