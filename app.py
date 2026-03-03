@@ -193,7 +193,7 @@ footer {visibility: hidden;}
 # ── Load artifacts ─────────────────────────────────────────────────────────────
 @st.cache_resource
 def load_artifacts():
-    base = Path(__file__).parent / "artifacts"
+    base = Path("artifacts")
     assets = joblib.load(base / "assets.joblib")
     model = CatBoostRegressor()
     model.load_model(str(base / "catboost_model.cbm"))
