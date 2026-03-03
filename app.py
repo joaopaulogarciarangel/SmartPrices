@@ -322,15 +322,15 @@ with st.sidebar:
 
     # Localização
     st.markdown("**📍 Localização**")
-    city_list = assets["city_list"]
-    city = st.selectbox("Cidade", city_list,
-                        index=city_list.index("São Paulo") if "São Paulo" in city_list else 0)
+    city_list = sorted(assets.get("city_list", [])) or ["São Paulo"]
+    default_city_idx = city_list.index("São Paulo") if "São Paulo" in city_list else 0
+    city = st.selectbox("Cidade", city_list, index=default_city_idx)
 
-    nbh_list = ["(Não informado)"] + assets["neighborhood_list"]
+    nbh_list = ["(Não informado)"] + sorted(assets.get("neighborhood_list", []))
     neighborhood = st.selectbox("Bairro", nbh_list)
     if neighborhood == "(Não informado)":
-        neighborhood = city_list[0]
-
+        neighborhood = city
+    
     zone = st.selectbox("Zona", ["(Não informado)", "Zona Sul", "Zona Norte",
                                   "Zona Oeste", "Zona Central", "Sudeste", "Bairros"])
 
