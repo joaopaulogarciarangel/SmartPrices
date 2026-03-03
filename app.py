@@ -181,6 +181,10 @@ def load_artifacts():
             st.info(f"Arquivos disponíveis: {os.listdir('.')}")
             return None, None
             
+        # Extrair cat_cols direto do modelo — sempre em sync
+        cat_indices = model.get_cat_feature_indices()
+        assets["cat_cols"] = [assets["selected_features"][i] for i in cat_indices]
+
         return model, assets
         
     except Exception as e:
@@ -297,15 +301,15 @@ def build_features(inputs: dict):
 
     df = df[a["selected_features"]].fillna(0)
 
-    # Aplicar tipos corretos — categóricas como int, numéricas como float
+    # Usar cat_cols extraído do próprio modelo
+    cat_cols = a.get("cat_cols", CAT_COLS)
     for col in df.columns:
-        if col in CAT_COLS:
-            df[col] = df[col].astype(int)
+        if col in cat_cols:
+            df[col] = df[col].fillna(0).astype(int)
         else:
-            df[col] = df[col].astype(float)
+            df[col] = df[col].fillna(0).astype(float)
 
     return df, lat, lon
-
 # ── Session state ──────────────────────────────────────────────────────────────
 if "result" not in st.session_state:
     st.session_state.result = None
