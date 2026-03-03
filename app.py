@@ -165,7 +165,7 @@ def load_artifacts():
         # Procurar modelo
         # Procurar modelo
         for base_path in possible_paths:
-            for model_file in ["catboost_model.cbm", "catboost_model (1).cbm"]:
+            for model_file in ["catboost_model.cbm", "catboost_model (4).cbm"]:
                 model_path = os.path.join(base_path, model_file)
                 if os.path.exists(model_path):
                     model = CatBoostRegressor()
