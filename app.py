@@ -185,6 +185,9 @@ def load_artifacts():
         cat_indices = model.get_cat_feature_indices()
         assets["cat_cols"] = [assets["selected_features"][i] for i in cat_indices]
 
+        # Salvar ordem exata que o modelo espera
+        assets["model_feature_names"] = list(model.feature_names_)
+
         return model, assets
         
     except Exception as e:
@@ -299,7 +302,7 @@ def build_features(inputs: dict):
             default = a["feature_medians"].get(col, 0)
             df[col] = int(default) if col in CAT_COLS else float(default)
 
-    df = df[a["selected_features"]].fillna(0)
+    df = df[a["model_feature_names"]].fillna(0)
 
     # Usar cat_cols extraído do próprio modelo
     cat_cols = a.get("cat_cols", CAT_COLS)
