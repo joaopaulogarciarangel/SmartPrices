@@ -129,13 +129,12 @@ footer {visibility: hidden;}
 # ── Colunas categóricas do modelo ──────────────────────────────────────────────
 CAT_COLS = [
     'listing.backyard', 'listing.barbgrill', 'listing.pool',
-    'zone_Zona Sul', 'has_parking',
+    'zone_Zona Norte', 'zone_Zona Sul', 'has_parking',
     'imvl_type_casas', 'imvl_type_casas-de-condominio',
     'imvl_type_casas-de-vila', 'imvl_type_flat',
     'imvl_type_quitinetes', 'imvl_type_studio',
     'geo_k10', 'geo_k30', 'geo_k100', 'has_bank_500m'
 ]
-
 # ── Load artifacts ─────────────────────────────────────────────────────────────
 @st.cache_resource
 def load_artifacts():
